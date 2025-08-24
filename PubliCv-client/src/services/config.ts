@@ -1,5 +1,5 @@
 const Config= {
-    DOMAIN: "https://localhost:7119"
+    DOMAIN: "https://publicv.online/api"
 };
 
 export default Config;

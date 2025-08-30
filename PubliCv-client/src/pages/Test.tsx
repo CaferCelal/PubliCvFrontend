@@ -8,9 +8,9 @@ import type { LoginDto } from "../dtos/login-dto";
 function Test() {
     const handleRegister = () => {
         const dto: RegisterDto = {
-            userName: "testtuser",
-            email: "testtuser@example.com",
-            password: "TestPassword123",
+            userName: "Cafeeer",
+            email: "celal.evrenuz@hotmail.com",
+            password: "Lenovo56_asus",
         };
 
         AuthServices.registerUser(dto).then((response) => {

@@ -18,6 +18,32 @@ const FileServices = {
             return { data: "File uploaded successfully." };
         });
     },
+
+    getMyDocuments(): Promise<{ id: string; fileName: string }[]> {
+        return fetch(`${Config.DOMAIN}/file/get/metadata`, {
+            method: "GET",
+            credentials: "include", // send auth cookie/session
+        }).then(async (res) => {
+            if (!res.ok) {
+                const errorText = await res.text();
+                throw new Error(errorText || `Failed to fetch documents (${res.status})`);
+            }
+            return res.json();
+        });
+    },
+    getFile(fileId: string): Promise<Blob> {
+        return fetch(`${Config.DOMAIN}/file/get/${encodeURIComponent(fileId)}`, {
+            method: "GET",
+            credentials: "include", // send auth cookie/session
+        }).then(async (res) => {
+            if (!res.ok) {
+                const errorText = await res.text();
+                throw new Error(errorText || `Failed to fetch file (${res.status})`);
+            }
+            return res.blob(); // return as Blob for inline display
+        });
+    }
+
 };
 
 export default FileServices;

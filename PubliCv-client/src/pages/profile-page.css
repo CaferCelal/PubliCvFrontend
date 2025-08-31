@@ -5,110 +5,170 @@
     color: #0a1d49;
 }
 
-/* Sidebar */
-.profile-page-container .sidebar {
+/* Sidebar (desktop) */
+.sidebar {
     flex: 0 0 20%;
     min-width: 200px;
     max-width: 300px;
-    background: #ffffff;
+    background: #fff;
     border-right: 2px solid #0a1d49;
     display: flex;
     flex-direction: column;
-    height: 100%; /* full height */
+    height: 100%;
 }
 
-.profile-page-container .sidebar-title {
+.sidebar-title {
     margin: 1rem;
     font-size: 1.2rem;
     font-weight: 600;
     border-bottom: 2px solid #0a1d49;
     padding-bottom: 0.5rem;
-    color: #0a1d49;
-    flex-shrink: 0;
 }
 
-/* Certificate list takes available space and scrolls */
-.profile-page-container .certificate-list {
+.certificate-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    flex: 1;                /* take remaining space */
-    overflow-y: auto;       /* scroll vertically */
+    flex: 1;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.profile-page-container .certificate-item {
+.certificate-item {
     padding: 0.6rem 0.8rem;
     margin-bottom: 0.5rem;
     border: 2px solid #0a1d49;
     border-radius: 6px;
     background: #eae5e5;
-    color: #0a1d49;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
     width: 80%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: background 0.2s;
 }
+.certificate-item:hover { background: #dcd6d6; }
+.certificate-item.active { background: #cfc9c9; font-weight: 600; }
 
-.profile-page-container .certificate-item:hover {
-    background: #dcd6d6;
-}
-
-.profile-page-container .certificate-item.active {
-    background: #cfc9c9;
-    font-weight: 600;
-}
-.profile-page-container .sidebar-bottom {
+.sidebar-bottom {
     border-top: 2px solid #0a1d49;
-    margin: 1rem;
-    padding-top: 0.5rem;
-    flex-shrink: 0;
+    padding: 0.5rem;
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
-/* Resume button styled like login button */
-.profile-page-container .sidebar-bottom .resume-button {
+.mobile-menu-button {
+    display: none;
+    visibility: collapse;
+}
+
+.resume-button {
     background: #0a1d49;
-    color: #ffffff;
+    color: #fff;
     border: none;
     border-radius: 8px;
-    padding: 0.6rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
+    padding: 0.6rem 1rem;
     cursor: pointer;
-    width: 90%;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+.resume-button:hover { background: #1b3d8a; }
+
+.content { flex: 1; padding: 2rem; background: #fff; }
+
+.pdf-container {
+    height: 80vh;
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    background: #f9f9f9;
 }
 
-/* Hover effect */
-.profile-page-container .resume-button:hover {
-    background: #1b3d8a;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    transform: translateY(-2px);
+.pdf-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
 }
 
-/* Active/click effect */
-.profile-page-container .resume-button:active {
-    background: #08132e;
-    transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.pdf-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
 }
 
-.profile-page-container .resume-button:hover {
-    background: #dcd6d6;
+.share-button {
+    background: #0a1d49;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.4rem 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
 }
+.share-button:hover { background: #1b3d8a; }
 
-/* Content */
-.profile-page-container .content {
-    flex: 1;
-    padding: 2rem;
-    background: #ffffff;
-    color: #0a1d49;
+/* -------------------- MOBILE -------------------- */
+@media screen and (max-width: 768px) {
+    .profile-page-container { flex-direction: column; height: 100vh; }
+
+    /* Hide desktop sidebar */
+    .sidebar { display: none; }
+
+    /* Mobile menu button */
+    .mobile-menu-button {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1000;
+        background: #0a1d49;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 0.5rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        visibility: visible;
+    }
+
+    /* Mobile sidebar menu */
+    .mobile-sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 250px;
+        height: 100%;
+        background: #fff;
+        border-right: 2px solid #0a1d49;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        transition: left 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
+    }
+
+    .mobile-sidebar.open {
+        left: 0;
+    }
+
+    .certificate-item { width: 100%; }
+
+    .pdf-wrapper { width: 100%; }
+    .pdf-wrapper canvas { width: 100% !important; height: auto !important; }
+
+    .pdf-container {
+        height: calc(100vh - 56px - 3rem);
+        max-height: none;
+        overflow-y: auto;
+    }
 }

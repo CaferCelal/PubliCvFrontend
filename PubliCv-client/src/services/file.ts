@@ -31,16 +31,40 @@ const FileServices = {
             return res.json();
         });
     },
-    getFile(fileId: string): Promise<Blob> {
-        return fetch(`${Config.DOMAIN}/file/get/${encodeURIComponent(fileId)}`, {
+
+    // services/file.ts
+    getFile(fileId: string): Promise<{ blob: Blob; fileName: string }> {
+        return fetch(`${Config.DOMAIN}/file/get/${fileId}`, {
             method: "GET",
-            credentials: "include", // send auth cookie/session
+            credentials: "include",
         }).then(async (res) => {
             if (!res.ok) {
                 const errorText = await res.text();
                 throw new Error(errorText || `Failed to fetch file (${res.status})`);
             }
-            return res.blob(); // return as Blob for inline display
+
+            const blob = await res.blob();
+
+            const contentDisposition = res.headers.get("Content-Disposition");
+            let fileName = "download.pdf"; // fallback
+
+            if (contentDisposition) {
+                // Prefer UTF-8 encoded filename*=, robust regex
+                const filenameStarMatch = contentDisposition.match(/filename\*\s*=\s*UTF-8''([^;]+)/i);
+                if (filenameStarMatch) {
+                    fileName = decodeURIComponent(filenameStarMatch[1]);
+                } else {
+                    // Fallback to simple filename=
+                    const filenameMatch = contentDisposition.match(/filename="?([^";]+)"?/i);
+                    if (filenameMatch) {
+                        fileName = filenameMatch[1];
+                    }
+                }
+            }
+
+            console.log("Log in service:", fileName);
+
+            return { blob, fileName };
         });
     }
 

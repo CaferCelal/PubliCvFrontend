@@ -5,12 +5,14 @@ import AuthServices from "../services/auth.ts";
 import Toast from "../components/toast.tsx";
 import { useNavigate } from "react-router-dom";
 
+
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [toast, setToast] = useState<{ message: string; isPositive: boolean } | null>(null);
     const navigate = useNavigate();
+
 
     const navigateToForgotPassword = () =>{
         navigate("/forgot-password")

@@ -6,13 +6,12 @@ import ForgotPasswordPage from "./pages/forgot-password-page.tsx";
 import RegistrationPage from "./pages/reset-password-page.tsx";
 import ResetPasswordPage from "./pages/reset-password-page.tsx";
 import ProfilePage from "./pages/profile-page.tsx";
-import PdfViewer from "./pages/pdf-viewer.tsx";
+import PdfViewer from "./components/pdf-viewer.tsx";
 
 const AppRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/pdf-test" element={<PdfViewer />}/>
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/forgot-password/reset-password" element={<ResetPasswordPage />} />
                 <Route path="/forgot-password" element={<ForgotPasswordPage/>} />

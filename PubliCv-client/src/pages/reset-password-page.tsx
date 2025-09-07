@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import "./reset-password-page.css";
 import SvgLogo from "../../public/PubliCvLogo.svg";
-import { Check, X } from "lucide-react";
 import AuthServices from "../services/auth.ts";
 import type { ResetPasswordWithTokenDto } from "../dtos/reset-password-with-token-dto";
 
@@ -22,7 +21,7 @@ const ResetPasswordPage = () => {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
 
-    // Password rules
+    // Validation helpers
     const isLengthValid = password.length >= 8 && password.length <= 40;
     const isMatch = password === confirmPassword && password.length > 0;
 
@@ -68,18 +67,8 @@ const ResetPasswordPage = () => {
                         </p>
                     </div>
                 ) : (
-                    <form onSubmit={handleSubmit} style={{ width: "100%" }}>
-                        <div className="rules">
-                            <div className={`rule ${isLengthValid ? "ok" : "fail"}`}>
-                                {isLengthValid ? <Check size={16} /> : <X size={16} />}
-                                <span>Password must be 8-40 characters</span>
-                            </div>
-                            <div className={`rule ${isMatch ? "ok" : "fail"}`}>
-                                {isMatch ? <Check size={16} /> : <X size={16} />}
-                                <span>Passwords must match</span>
-                            </div>
-                        </div>
-
+                    <form onSubmit={handleSubmit} style={{ width: "100%" }} noValidate>
+                        {/* Password */}
                         <div className="input-field">
                             <label htmlFor="password">New Password</label>
                             <input
@@ -90,8 +79,12 @@ const ResetPasswordPage = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
+                            {password && !isLengthValid && (
+                                <span>Password must be 8–40 characters</span>
+                            )}
                         </div>
 
+                        {/* Confirm Password */}
                         <div className="input-field">
                             <label htmlFor="confirmPassword">Confirm New Password</label>
                             <input
@@ -102,6 +95,9 @@ const ResetPasswordPage = () => {
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required
                             />
+                            {confirmPassword && !isMatch && (
+                                <span>Passwords must match</span>
+                            )}
                         </div>
 
                         {error && <p style={{ color: "red", marginBottom: "1rem" }}>{error}</p>}

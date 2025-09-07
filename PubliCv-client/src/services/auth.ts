@@ -6,6 +6,7 @@ import type { ResetPasswordWithTokenDto } from "../dtos/reset-password-with-toke
 
 export interface ApiResponse<T> {
     data: T;
+    status: number;
 }
 
 const AuthServices = {
@@ -16,10 +17,16 @@ const AuthServices = {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(dto),
-        }).then((res) => res.json());
+        }).then(async (res) => {
+            const data = await res.json();
+            return {
+                status: res.status,
+                data,
+            };
+        });
     },
 
-    loginUser(dto: LoginDto): Promise<ApiResponse<string>> {
+    loginUser(dto: LoginDto): Promise<{ status: number; data: any }> {
         return fetch(`${Config.DOMAIN}/auth/login`, {
             method: "POST",
             credentials: "include",
@@ -27,7 +34,10 @@ const AuthServices = {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(dto),
-        }).then((res) => res.json());
+        }).then(async (res) => {
+            const data = await res.json();
+            return { status: res.status, data };
+        });
     },
 
     logoutUser(): Promise<ApiResponse<string>> {

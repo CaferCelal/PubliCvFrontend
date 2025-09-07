@@ -1,4 +1,4 @@
-.reset-password-page-container {
+.register-page-container {
     height: 100vh;
     width: 100vw;
     background: #eae5e5;
@@ -7,7 +7,7 @@
     justify-content: center;
 }
 
-.reset-password-page-container .middle {
+.register-page-container .middle {
     color: #0a1d49;
     border: 2px solid #0a1d49;
     border-radius: 10px;
@@ -17,46 +17,47 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: #fff;
 }
 
-.reset-password-page-container .middle .logo {
+.register-page-container .middle .logo {
     width: 7rem;
     margin-bottom: 1rem;
 }
 
-.reset-password-page-container .middle .rules {
+.register-page-container .middle .rules {
     width: 100%;
     margin-bottom: 1rem;
 }
 
-.reset-password-page-container .middle .rules .rule {
+.register-page-container .middle .rules .rule {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 0.3rem;
 }
 
-.reset-password-page-container .middle .rules .rule.ok {
+.register-page-container .middle .rules .rule.ok {
     color: #0a1d49;
 }
 
-.reset-password-page-container .middle .rules .rule.fail {
+.register-page-container .middle .rules .rule.fail {
     color: red;
 }
 
-.reset-password-page-container .middle .input-field {
+.register-page-container .middle .input-field {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-bottom: 1rem;
 }
 
-.reset-password-page-container .middle .input-field label {
+.register-page-container .middle .input-field label {
     font-weight: 600;
     margin-bottom: 0.3rem;
 }
 
-.reset-password-page-container .middle .input-field input {
+.register-page-container .middle .input-field input {
     width: 100%;
     padding: 0.5rem;
     border: 1px solid #0a1d49;
@@ -65,12 +66,12 @@
     outline: none;
 }
 
-.reset-password-page-container .middle .input-field input:focus {
+.register-page-container .middle .input-field input:focus {
     border-color: #1b3d8a;
     box-shadow: 0 0 5px rgba(27, 61, 138, 0.3);
 }
 
-.reset-password-page-container .middle .reset-button {
+.register-page-container .middle .register-button {
     background: #0a1d49;
     color: #ffffff;
     border: none;
@@ -85,26 +86,48 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
-.reset-password-page-container .middle .reset-button:hover:enabled {
+.register-page-container .middle .register-button:hover:enabled {
     background: #1b3d8a;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-.reset-password-page-container .middle .reset-button:disabled {
+.register-page-container .middle .register-button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
+.register-page-container .middle .password-input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.register-page-container .middle .password-input-wrapper input {
+    width: 100%;
+}
+
+.register-page-container .middle .password-input-wrapper .toggle-visibility {
+    position: absolute;
+    right: 0.6rem;
+    cursor: pointer;
+    color: #0a1d49;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
 @media (max-width: 768px) {
-    .reset-password-page-container .middle {
+    .register-page-container .middle {
         width: 75%;
         max-width: 350px;
         height: auto;
         padding: 1.5rem;
     }
 
-    .reset-password-page-container .middle .logo {
+    .register-page-container .middle .logo {
         width: 6rem;
     }
 }

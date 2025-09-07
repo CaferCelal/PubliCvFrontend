@@ -117,16 +117,45 @@
 
 /* -------------------- MOBILE -------------------- */
 @media screen and (max-width: 768px) {
-    .profile-page-container { flex-direction: column; height: 100vh; }
+    .profile-page-container { flex-direction: column; height: auto; }
+
+    :root {
+        --sidebar-width: 250px; /* keep this in sync */
+        --move-button-width:280px;
+    }
 
     /* Hide desktop sidebar */
     .sidebar { display: none; }
 
-    /* Mobile menu button */
+    /* Mobile sidebar menu */
+    .mobile-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: var(--sidebar-width);
+        height: 100%;
+        background: #fff;
+        border-right: 2px solid #0a1d49;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        transition: transform 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
+        transform: translateX(-100%);
+    }
+
+    /* Sidebar open state */
+    .mobile-sidebar.open {
+        transform: translateX(0);
+    }
+
     .mobile-menu-button {
         position: fixed;
         top: 1rem;
-        left: 1rem;
+        left: 0;
+        transform: translateX(0);              /* default */
+        transition: transform 0.3s ease;       /* follow animation */
         z-index: 1000;
         background: #0a1d49;
         color: #fff;
@@ -138,36 +167,22 @@
         align-items: center;
         justify-content: center;
         visibility: visible;
+        margin-left: 10px;
     }
 
-    /* Mobile sidebar menu */
-    .mobile-sidebar {
-        position: fixed;
-        top: 0;
-        left: -250px;
-        width: 250px;
-        height: 100%;
-        background: #fff;
-        border-right: 2px solid #0a1d49;
-        display: flex;
-        flex-direction: column;
-        padding: 1rem;
-        transition: left 0.3s ease;
-        z-index: 999;
-        overflow-y: auto;
+    .mobile-sidebar.open ~ .mobile-menu-button {
+        transform: translateX(var(--move-button-width));
     }
 
-    .mobile-sidebar.open {
-        left: 0;
-    }
+    .resume-button { margin-bottom: 2rem}
 
-    .certificate-item { width: 100%; }
+    .certificate-item { width: 80%; }
 
     .pdf-wrapper { width: 100%; }
     .pdf-wrapper canvas { width: 100% !important; height: auto !important; }
 
     .pdf-container {
-        height: calc(100vh - 56px - 3rem);
+        height: auto;
         max-height: none;
         overflow-y: auto;
     }

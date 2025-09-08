@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Test from "./pages/Test.tsx";
 import LoginPage from "./pages/login-page.tsx";
 import LandingPage from "./pages/landing-page.tsx";
 import ForgotPasswordPage from "./pages/forgot-password-page.tsx";
@@ -21,8 +20,6 @@ const AppRoutes = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/:userName/:fileId" element={<PublicFilePage />} />
-
-                <Route path="/test" element={<Test />} />
             </Routes>
         </BrowserRouter>
     );

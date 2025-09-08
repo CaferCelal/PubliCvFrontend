@@ -1,10 +1,4 @@
-import React, {
-    useEffect,
-    useState,
-    useImperativeHandle,
-    forwardRef,
-    useMemo,
-} from "react";
+import { useEffect, useState, useImperativeHandle, forwardRef, useMemo} from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import FileServices from "../services/file.ts";
 import spinnerUrl from '../../public/spinner.svg';

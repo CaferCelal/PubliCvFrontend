@@ -4,6 +4,7 @@ import SvgLogo from "../../public/PubliCvLogo.svg";
 import Toast from "../components/toast.tsx";
 import AuthServices from "../services/auth.ts";
 
+
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState("");
     const [submitted, setSubmitted] = useState(false);
@@ -12,7 +13,7 @@ const ForgotPasswordPage = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        let timer: NodeJS.Timeout;
+        let timer: number;
         if (cooldown > 0) {
             timer = setTimeout(() => setCooldown(cooldown - 1), 1000);
         }
@@ -24,7 +25,7 @@ const ForgotPasswordPage = () => {
 
         setLoading(true);
         try {
-            const response = await AuthServices.forgotPassword(email);
+            await AuthServices.forgotPassword(email);
 
             // Always show positive toast even if email is not registered
             setToast({

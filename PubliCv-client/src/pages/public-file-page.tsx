@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import PdfViewer from "../components/pdf-viewer";
 import type { PdfViewerHandle } from "../components/pdf-viewer";
 import FileServices from "../services/file";
 import { Download } from "lucide-react";
-import Toast from "../components/toast";
 import "./profile-page.css"; // reuse styles
 
 const PublicFilePage = () => {
@@ -14,7 +13,6 @@ const PublicFilePage = () => {
     const [fileName, setFileName] = useState<string>("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [toast, setToast] = useState<{ message: string; isPositive: boolean } | null>(null);
 
     useEffect(() => {
         if (!userName || !fileId) {
@@ -59,7 +57,6 @@ const PublicFilePage = () => {
                 )}
             </main>
 
-            {toast && <Toast message={toast.message} isPositive={toast.isPositive} />}
         </div>
     );
 };
